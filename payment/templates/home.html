@@ -2,16 +2,20 @@
 {% block content %}
     {% for a in arr %}
     <form class="" action="{% url 'payment:payment' %}" method="post">
-      {% csrf_token %}
-      <label for="{{a}}">Pay {{a}}$</label>
-      <input id="{{a}}" type="hidden" name="amount" value="{{ a }}">
-      <input type="submit" class="btn btn-primary" value="Pay {{a}}$">
+      <div class="form-group">
+        {% csrf_token %}
+        <input type="hidden" name="amount" value="{{ a }}">
+        <input type="submit" class="btn btn-primary" value="Pay ${{ a }}">
+      </div>
     </form>
     {% endfor %}
     <form class="" action="{% url 'payment:payment' %}" method="post">
-      {% csrf_token %}
-      <label for="manual">Enter Amount Manually</label>
-      <input id="manual" type="text" name="amount" value="">
-      <input type="submit" class="btn btn-primary" value="Pay">
+      <div class="form-group">
+        {% csrf_token %}
+        <label for="manual">Enter Amount Manually</label>
+        <input id="manual" class="form-control" style="width: revert;" type="number" name="amount" value="">
+        <p></p>
+        <input type="submit" class="btn btn-primary" value="Pay">
+      </div>
     </form>
 {% endblock %}

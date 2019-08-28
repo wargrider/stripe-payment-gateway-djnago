@@ -9,7 +9,7 @@ stripe.api_key = STRIPE_SECRET_KEY
 
 
 def index(request):
-    return render(request, 'home.html', {'arr':[5,10,15,20]})
+    return render(request, 'home.html', {'arr':[5.0,10.0,15.0,20.0]})
 
 
 def payment(request):
@@ -20,11 +20,10 @@ def payment(request):
 
 def charge(request):
     if request.method == 'POST':
-        breakpoint()
         charge = stripe.Charge.create(
-            amount=x,
+            amount=int(request.POST['amount']),
             currency='usd',
             description='A Django charge',
             source=request.POST['stripeToken']
         )
-        return render(request, 'charge.html')
+        return render(request, 'charge.html', {'amount': int(request.POST['amount'])/100 })

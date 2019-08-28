@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 {% load mathfilters %}
 {% block content %}
-    <h2>Buy for ${{amount}}</h2>
+    <h2>Pay ${{amount}}</h2>
     <form action="{% url 'payment:charge' %}" method="post">
       {% csrf_token %}
+      <input type="hidden" name="amount" value="{{ amount|mul:100 }}">
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="{{ key }}"
             data-description="A Django Charge"
