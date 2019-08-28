@@ -1,11 +1,10 @@
 {% extends "base.html" %}
-{% load mathfilters %}
 {% block content %}
     {% for a in arr %}
     <form class="" action="{% url 'payment:payment' %}" method="post">
       {% csrf_token %}
       <label for="{{a}}">Pay {{a}}$</label>
-      <input id="{{a}}" type="hidden" name="amount" value="{{ a|mul:100 }}">
+      <input id="{{a}}" type="hidden" name="amount" value="{{ a }}">
       <input type="submit" class="btn btn-primary" value="Pay {{a}}$">
     </form>
     {% endfor %}

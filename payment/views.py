@@ -14,15 +14,15 @@ def index(request):
 
 def payment(request):
     if request.method == 'POST':
-        breakpoint()
-        context = {'key': STRIPE_PUBLISHABLE_KEY}
+        context = {'key': STRIPE_PUBLISHABLE_KEY, 'amount': request.POST['amount']}
         return render(request, 'payment.html', context)
 
 
 def charge(request):
     if request.method == 'POST':
+        breakpoint()
         charge = stripe.Charge.create(
-            amount=500,
+            amount=x,
             currency='usd',
             description='A Django charge',
             source=request.POST['stripeToken']
