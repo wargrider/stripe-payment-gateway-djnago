@@ -20,10 +20,11 @@ def payment(request):
 
 def charge(request):
     if request.method == 'POST':
+        amount = int(float(request.POST['amount']))
         charge = stripe.Charge.create(
-            amount=int(request.POST['amount']),
+            amount=amount,
             currency='usd',
             description='A Django charge',
             source=request.POST['stripeToken']
         )
-        return render(request, 'charge.html', {'amount': int(request.POST['amount'])/100 })
+        return render(request, 'charge.html', {'amount': amount/100})
